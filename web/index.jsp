@@ -11,6 +11,6 @@
     <title>$Title$</title>
   </head>
   <body>
- Alive!
+ <h2>Alive!YEEEEP,${status}<h2>
   </body>
 </html>
