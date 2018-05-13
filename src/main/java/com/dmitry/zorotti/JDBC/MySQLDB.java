@@ -1,10 +1,11 @@
 package com.dmitry.zorotti.JDBC;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
+import com.dmitry.zorotti.JDBC.dbClasses.Note;
+import com.dmitry.zorotti.JDBC.dbClasses.User;
 import com.mysql.jdbc.*;
+import com.mysql.jdbc.Driver;
 
 public class MySQLDB implements DBFactory{
     private final String USER_NAME="root";
@@ -30,6 +31,7 @@ public class MySQLDB implements DBFactory{
         return  localInstance;
     }
     Connection connection=null;
+    Statement statement;
     private MySQLDB(){};
 
     public void getConnection() throws ClassNotFoundException, SQLException {
@@ -38,19 +40,45 @@ public class MySQLDB implements DBFactory{
 
     }
 
-    public void insertUser() {
+    public void insertUser(User user) {
 
     }
 
-    public void deleteUser() {
+    public void deleteUser(User user) {
 
     }
 
-    public void addNote() {
+    public void addNote(Note note) {
 
     }
 
-    public void deleteNote() {
+    public void deleteNote(Note note) {
 
+    }
+    private boolean updateQuery(String query)  {
+        try {
+            statement.executeUpdate(query);
+        } catch (SQLException e) {
+            return false;
+        }
+        return true;
+    }
+    private boolean setQuery(String query){
+        try {
+            statement.execute(query);
+        } catch (SQLException e) {
+            return false;
+        }
+        return true;
+    }
+    private String getQuery(String query){
+        ResultSet resultSet;
+        try {
+            resultSet=statement.executeQuery(query);
+        } catch (SQLException e) {
+            return "";
+        }
+        //change output to normal view
+        return resultSet.toString();
     }
 }
